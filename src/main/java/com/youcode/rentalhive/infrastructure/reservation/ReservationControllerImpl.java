@@ -6,6 +6,9 @@ import com.youcode.rentalhive.domain.equipement.EquipementRepository;
 import com.youcode.rentalhive.domain.reservation.Reservation;
 import com.youcode.rentalhive.domain.user.User;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -20,33 +23,18 @@ import java.util.UUID;
 public class ReservationControllerImpl implements ReservationController{
 
     private final ReservationService reservationService;
-    private final EquipementRepository equipementRepository;
 
 
     @PostMapping("/save")
-    public Reservation save(@RequestBody Reservation reservation) {
+    public ResponseEntity<Reservation> save(@RequestBody Reservation reservation) {
 
-        User userId = reservation.getUser();
-        Equipement equipementId = reservation.getEquipement();
+        Reservation reservation1 = reservationService.save(reservation);
 
-       /* User user = new User();
-        user.setId(userId.getId());*/
-
-        Equipement equipement = new Equipement();
-        equipement.setId(equipementId.getId());
-
-        /*reservation.setUser(user);*/
-        reservation.setEquipement(equipement);
-
-        Optional<Equipement> fetchedEquipement = equipementRepository.findById(equipement.getId());
-
-        if (fetchedEquipement != null) {
-            reservation.setCost(fetchedEquipement.get().getDailyRentalCost());
+        if (reservation1 != null) {
+            return ResponseEntity.status(HttpStatus.OK).body(reservation1);
         } else {
-            System.err.println("Equipement not found for ID: " + equipement.getId());
+            return  ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
-
-        return reservationService.save(reservation);
 
     }
     @GetMapping("/")
@@ -55,9 +43,10 @@ public class ReservationControllerImpl implements ReservationController{
     }
 
     @GetMapping("/find/{id}/{userID}")
-    public Reservation findByIdAndUserId(@PathVariable long id ,@PathVariable User userID) {
-
-        return reservationService.findByIdAndUserId(id ,userID);
+    public List<Reservation> findByEquipmentIdAndUserId(@PathVariable(value = "id") long equipmentId ,@PathVariable(value = "userI") long userID) {
+        long e = equipmentId;
+        long u = userID;
+        return reservationService.findByEquipmentIdAndUserId(equipmentId ,userID);
     }
 
 }

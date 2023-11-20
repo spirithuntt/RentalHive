@@ -13,5 +13,5 @@ public interface ReservationService {
 
     public List<Reservation> findAll();
 
-    public Reservation findByIdAndUserId(long id , User userId);
+    public List<Reservation> findByEquipmentIdAndUserId(long equipmentId , long userId);
 }
