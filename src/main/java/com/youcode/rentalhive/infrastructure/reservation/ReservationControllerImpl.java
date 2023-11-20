@@ -30,13 +30,13 @@ public class ReservationControllerImpl implements ReservationController{
         User userId = reservation.getUser();
         Equipement equipementId = reservation.getEquipement();
 
-        User user = new User();
-        user.setId(userId.getId());
+       /* User user = new User();
+        user.setId(userId.getId());*/
 
         Equipement equipement = new Equipement();
         equipement.setId(equipementId.getId());
 
-        reservation.setUser(user);
+        /*reservation.setUser(user);*/
         reservation.setEquipement(equipement);
 
         Optional<Equipement> fetchedEquipement = equipementRepository.findById(equipement.getId());
