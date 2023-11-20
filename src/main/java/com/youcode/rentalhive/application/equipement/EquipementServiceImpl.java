@@ -29,6 +29,6 @@ public class EquipementServiceImpl implements EquipementService {
 
     @Override
     public Equipement findByNameAndUuid(String name, UUID uuid) {
-        return equipementRepository.findByNameAndPlateNumber(name, uuid);
+        return equipementRepository.findByNameAndUuid(name, uuid);
     }
 }
