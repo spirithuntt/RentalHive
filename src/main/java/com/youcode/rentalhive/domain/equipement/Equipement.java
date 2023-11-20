@@ -1,8 +1,3 @@
-package com.youcode.rentalhive.domain.equipement;
-
-
-
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.youcode.rentalhive.domain.equipement.Equipement;
 
@@ -39,5 +34,6 @@ public class Equipement {
     private Double price;
 
     private UUID plateNumber;
+
 
 }
