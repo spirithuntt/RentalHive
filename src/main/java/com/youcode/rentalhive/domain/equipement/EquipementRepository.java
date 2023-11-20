@@ -7,4 +7,5 @@ import java.util.UUID;
 @Repository
 public interface EquipementRepository extends JpaRepository<Equipement, Long>{
     public Equipement findByNameAndUuid(String name, UUID uuid);
+
 }
