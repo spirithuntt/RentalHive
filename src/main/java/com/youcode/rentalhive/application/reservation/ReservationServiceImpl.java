@@ -10,6 +10,11 @@ import com.youcode.rentalhive.domain.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
+
+
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -28,10 +33,23 @@ public class ReservationServiceImpl implements ReservationService{
 
     @Override
     public Reservation save(Reservation reservation) {
+
+        Date currentDate = new Date();
+        if (reservation.getStartDate().before(currentDate)) {
+            throw new IllegalArgumentException("Reservation date cannot be in the past");
+        }
+
+        if (reservation.getStartDate().after(reservation.getEndDate())) {
+            throw new IllegalArgumentException("Start time must be before end time");
+        }
         try {
 
             Optional<Equipement> fetchedEquipement = equipementRepository.findById(reservation.getEquipement().getId());
             Optional<User> fetchedUser = userRepository.findById(reservation.getEquipement().getId());
+
+            EquipmentAvailability(fetchedEquipement.get(),reservation.getStartDate(), reservation.getEndDate());
+
+            validateReservationDates(fetchedEquipement.get(), reservation.getStartDate(), reservation.getEndDate());
 
             if (fetchedEquipement.isPresent() && fetchedUser.isPresent()) {
                 reservation.setEquipement(fetchedEquipement.get());
@@ -76,4 +94,28 @@ public class ReservationServiceImpl implements ReservationService{
 
         return daysDifference;
     }
+
+
+    private void validateReservationDates(Equipement equipement, Date startDate, Date endDate) {
+        List<Reservation> overlappingReservations = reservationRepository.validateReservationDates(
+                equipement, startDate, endDate);
+
+        if (!overlappingReservations.isEmpty()) {
+            throw new IllegalArgumentException("Equipement has overlapping reservations for the specified date range");
+        }
+    }
+
+
+    private void EquipmentAvailability(Equipement equipement, Date startDate, Date endDate) {
+        List<Reservation> conflictingReservations = reservationRepository.conflictingReservations(
+                equipement, startDate, endDate);
+
+        if (!conflictingReservations.isEmpty()) {
+            throw new IllegalArgumentException("Equipement is not available for the specified date range");
+        }
+    }
+    private LocalDate convertToLocalDate(Date date) {
+        return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    }
+
 }
