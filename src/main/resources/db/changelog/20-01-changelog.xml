@@ -5,35 +5,24 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd"
         objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
-
-    <changeSet id="1700157822936-1" author="yases (generated)">
-        <createTable tableName="user">
-            <column name="id" type="BIGINT" autoIncrement="true">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_user"/>
-            </column>
-            <column name="full_name" type="VARCHAR(255)"/>
-            <column name="is_admin" type="BOOLEAN">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-    </changeSet>
-
-    <changeSet id="1700157822936-2" author="yases (generated)">
+    <changeSet id="1700475603348-1" author="yases (generated)">
         <createTable tableName="equipement">
-            <column name="id" type="BIGINT" autoIncrement="true">
+            <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_equipement"/>
             </column>
-            <column name="name" type="VARCHAR(255)"/>
-            <column name="daily_rental_cost" type="BIGINT">
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="daily_rental_cost" type="DOUBLE">
                 <constraints nullable="false"/>
             </column>
             <column name="uuid" type="binary(16)"/>
+            <column name="status" type="SMALLINT"/>
         </createTable>
     </changeSet>
-
-    <changeSet id="1700157822936-3" author="yases (generated)">
+    <changeSet id="1700475603348-2" author="yases (generated)">
         <createTable tableName="reservation">
-            <column name="id" type="BIGINT" autoIncrement="true">
+            <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_reservation"/>
             </column>
             <column name="start_date" type="DATETIME"/>
@@ -45,13 +34,21 @@
             <column name="equipement_id" type="BIGINT"/>
         </createTable>
     </changeSet>
-
-    <changeSet id="1700157822936-4" author="yases (generated)">
+    <changeSet id="1700475603348-3" author="yases (generated)">
+        <createTable tableName="user">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_user"/>
+            </column>
+            <column name="full_name" type="VARCHAR(255)"/>
+            <column name="is_admin" type="BOOLEAN"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1700475603348-4" author="yases (generated)">
         <addForeignKeyConstraint baseColumnNames="equipement_id" baseTableName="reservation"
                                  constraintName="FK_RESERVATION_ON_EQUIPEMENT" referencedColumnNames="id"
                                  referencedTableName="equipement"/>
     </changeSet>
-    <changeSet id="1700157822936-5" author="yases (generated)">
+    <changeSet id="1700475603348-5" author="yases (generated)">
         <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="reservation"
                                  constraintName="FK_RESERVATION_ON_USER" referencedColumnNames="id"
                                  referencedTableName="user"/>
