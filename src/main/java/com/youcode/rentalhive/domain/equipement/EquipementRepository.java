@@ -6,6 +6,5 @@ import java.util.UUID;
 
 @Repository
 public interface EquipementRepository extends JpaRepository<Equipement, Long>{
-    public Equipement findByNameAndPlateNumber(String name, UUID plateNumber);
-
+    public Equipement findByNameAndUuid(String name, UUID uuid);
 }
