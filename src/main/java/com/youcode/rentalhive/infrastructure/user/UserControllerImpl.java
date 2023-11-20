@@ -26,7 +26,7 @@ public class UserControllerImpl implements UserController {
         }
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     public ResponseEntity<List<User>> findAll() {
         try {
             List<User> users = userService.findAll();

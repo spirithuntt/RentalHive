@@ -76,4 +76,8 @@ public class ReservationServiceImpl implements ReservationService{
 
         return daysDifference;
     }
+
+    public List<Reservation> getRentalHistoryForEquipement(long equipementId) {
+        return reservationRepository.findAllByEquipementIdOrderByStartDateAsc(equipementId);
+    }
 }

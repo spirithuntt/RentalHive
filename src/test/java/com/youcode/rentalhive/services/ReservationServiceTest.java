@@ -40,4 +40,17 @@ class ReservationServiceTest {
         verify(reservationRepository, times(1)).findAll();
     }
 
+    @Test
+    void testGetRentalHistoryForEquipement() {
+        long equipementId = 1L;
+        List<Reservation> expectedReservations = Collections.singletonList(new Reservation());
+
+        when(reservationRepository.findAllByEquipementIdOrderByStartDateAsc(equipementId))
+                .thenReturn(expectedReservations);
+
+        List<Reservation> result = reservationService.getRentalHistoryForEquipement(equipementId);
+
+        assertEquals(expectedReservations, result);
+        verify(reservationRepository, times(1)).findAllByEquipementIdOrderByStartDateAsc(equipementId);
+    }
 }
