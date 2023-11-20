@@ -13,5 +13,5 @@ public interface EquipementService{
 
     public List<Equipement> findAll();
 
-    public Equipement findByNameAndPlateNumber(String name, UUID plateNumber);
+    public Equipement findByNameAndUuid(String name, UUID uuid);
 }
