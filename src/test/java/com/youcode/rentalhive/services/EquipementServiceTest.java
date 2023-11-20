@@ -56,12 +56,12 @@ class EquipementServiceImplTest {
         String equipementName = "SampleEquipement";
         UUID equipementUuid = UUID.randomUUID();
         Equipement expectedEquipement = new Equipement();
-        when(equipementRepository.findByNameAndPlateNumber(eq(equipementName), eq(equipementUuid)))
+        when(equipementRepository.findByNameAndUuid(eq(equipementName), eq(equipementUuid)))
                 .thenReturn(expectedEquipement);
 
         Equipement result = equipementService.findByNameAndUuid(equipementName, equipementUuid);
 
         assertEquals(expectedEquipement, result);
-        verify(equipementRepository, times(1)).findByNameAndPlateNumber(equipementName, equipementUuid);
+        verify(equipementRepository, times(1)).findByNameAndUuid(equipementName, equipementUuid);
     }
 }
