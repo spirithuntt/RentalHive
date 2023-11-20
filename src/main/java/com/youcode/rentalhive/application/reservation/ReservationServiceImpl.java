@@ -120,4 +120,5 @@ public class ReservationServiceImpl implements ReservationService{
     public List<Reservation> getRentalHistoryForEquipement(long equipementId) {
         return reservationRepository.findAllByEquipementIdOrderByStartDateAsc(equipementId);
     }
+
 }

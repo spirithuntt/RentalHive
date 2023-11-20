@@ -32,4 +32,5 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
                                                   @Param("startDate") Date startDate,
                                                   @Param("endDate") Date endDate);
     public List<Reservation> findAllByEquipementIdOrderByStartDateAsc(Long equipementId);
+
 }
