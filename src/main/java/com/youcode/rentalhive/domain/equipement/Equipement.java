@@ -1,3 +1,4 @@
+package com.youcode.rentalhive.domain.equipement;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.youcode.rentalhive.domain.equipement.Equipement;
 
@@ -28,12 +29,15 @@ public class Equipement {
     @NotBlank(message = "Name cannot be blank")
     private String name;
 
-    @NotNull(message = "Price cannot be null")
-    @NotBlank(message = "Price cannot be blank")
-    @Pattern(regexp = "^[0-9]+(\\.[0-9]{1,2})?$", message = "Price must be a number with 2 decimal places")
-    private Double price;
 
-    private UUID plateNumber;
+    @NotNull(message = "dailyRentalCost cannot be null")
+    @NotBlank(message = "dailyRentalCost cannot be blank")
+    @Pattern(regexp = "^[0-9]+(\\.[0-9]{1,2})?$", message = "dailyRentalCost must be a number with 2 decimal places")
+    @Column(name = "daily_rental_cost")
+    private Double dailyRentalCost;
 
+    private UUID uuid;
+
+    private EquipementStatus status;
 
 }

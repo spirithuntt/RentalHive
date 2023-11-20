@@ -40,6 +40,4 @@ public class Reservation {
     @ManyToOne
     @JoinColumn(name = "equipement_id")
     private Equipement equipement;
-
-
 }
