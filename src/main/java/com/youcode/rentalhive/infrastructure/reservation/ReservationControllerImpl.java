@@ -25,7 +25,6 @@ public class ReservationControllerImpl implements ReservationController{
     private final ReservationService reservationService;
 
 
-
     @PostMapping("/save")
     public ResponseEntity<Reservation> save(@RequestBody Reservation reservation) {
 
@@ -49,5 +48,13 @@ public class ReservationControllerImpl implements ReservationController{
         long u = userID;
         return reservationService.findByEquipmentIdAndUserId(equipmentId ,userID);
     }
+
+
+    @GetMapping("/equipement/{equipementId}")
+    public ResponseEntity<List<Reservation>> getRentalHistoryForEquipement(@PathVariable Long equipementId) {
+        List<Reservation> rentalHistory = reservationService.getRentalHistoryForEquipement(equipementId);
+        return new ResponseEntity<>(rentalHistory, HttpStatus.OK);
+    }
+
 
 }
