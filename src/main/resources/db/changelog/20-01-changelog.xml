@@ -22,7 +22,7 @@
     </changeSet>
     <changeSet id="1700475603348-2" author="yases (generated)">
         <createTable tableName="reservation">
-            <column autoIncrement="true" name="id" type="BIGINT">
+            <column autoIncrement="true" name="id" type="BIGINT" >
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_reservation"/>
             </column>
             <column name="start_date" type="DATETIME"/>
