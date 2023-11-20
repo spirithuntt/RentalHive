@@ -95,7 +95,6 @@ public class ReservationServiceImpl implements ReservationService{
         return daysDifference;
     }
 
-
     private void validateReservationDates(Equipement equipement, Date startDate, Date endDate) {
         List<Reservation> overlappingReservations = reservationRepository.validateReservationDates(
                 equipement, startDate, endDate);
@@ -118,4 +117,7 @@ public class ReservationServiceImpl implements ReservationService{
         return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
     }
 
+    public List<Reservation> getRentalHistoryForEquipement(long equipementId) {
+        return reservationRepository.findAllByEquipementIdOrderByStartDateAsc(equipementId);
+    }
 }

@@ -14,4 +14,6 @@ public interface ReservationService {
     public List<Reservation> findAll();
 
     public List<Reservation> findByEquipmentIdAndUserId(long equipmentId , long userId);
+
+    public List<Reservation> getRentalHistoryForEquipement(long equipementId) ;
 }

@@ -49,4 +49,12 @@ public class ReservationControllerImpl implements ReservationController{
         return reservationService.findByEquipmentIdAndUserId(equipmentId ,userID);
     }
 
+
+    @GetMapping("/equipement/{equipementId}")
+    public ResponseEntity<List<Reservation>> getRentalHistoryForEquipement(@PathVariable Long equipementId) {
+        List<Reservation> rentalHistory = reservationService.getRentalHistoryForEquipement(equipementId);
+        return new ResponseEntity<>(rentalHistory, HttpStatus.OK);
+    }
+
+
 }
