@@ -1,6 +1,7 @@
 package com.youcode.rentalhive.infrastructure.reservation;
 
 import com.youcode.rentalhive.domain.reservation.Reservation;
+import com.youcode.rentalhive.domain.user.User;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,5 +16,5 @@ public interface ReservationController {
     public List<Reservation> findAll();
 
 
-    public Reservation findByIdAndUserId(int id, int userID);
+    public Reservation findByIdAndUserId(long id, User userID);
 }
