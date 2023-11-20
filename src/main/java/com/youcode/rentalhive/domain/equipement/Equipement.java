@@ -31,8 +31,6 @@ public class Equipement {
 
 
     @NotNull(message = "dailyRentalCost cannot be null")
-    @NotBlank(message = "dailyRentalCost cannot be blank")
-    @Pattern(regexp = "^[0-9]+(\\.[0-9]{1,2})?$", message = "dailyRentalCost must be a number with 2 decimal places")
     @Column(name = "daily_rental_cost")
     private Double dailyRentalCost;
 

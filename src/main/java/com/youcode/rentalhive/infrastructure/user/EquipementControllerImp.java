@@ -19,7 +19,7 @@ public class EquipementControllerImp implements EquipementController{
             this.equipementService = equipementService;
         }
 
-        @PostMapping
+        @PostMapping("/save")
         public Equipement saveEquipement(@RequestBody Equipement equipement) {
             return equipementService.save(equipement);
         }

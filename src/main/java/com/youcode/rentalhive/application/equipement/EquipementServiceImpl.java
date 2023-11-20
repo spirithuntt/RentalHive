@@ -19,7 +19,7 @@ public class EquipementServiceImpl implements EquipementService {
 
 
     @Override
-    public Equipement save(@Valid Equipement equipement) {
+    public Equipement save(Equipement equipement) {
         if (validateEquipement(equipement)) {
             return equipementRepository.save(equipement);
         }
